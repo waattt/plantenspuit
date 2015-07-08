@@ -52,10 +52,6 @@ board.on("ready", function() {
             return 'Is al bezig!';
         }
     }
-
-//    setInterval(function(){
-//        geefWater(5000);
-//    }, 30000);
     
 });
 

@@ -3,6 +3,7 @@ var socketio = require('socket.io');
 
 var path = require('path');
 var moment = require('moment');
+var schedule = require('node-schedule');
 var five = require("johnny-five");
 var board = new five.Board({repl: false});
 
@@ -10,8 +11,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = socketio.listen(server);
 
-app.use(express.static('static'));
-app.use('/webcam',express.static(path.join(__dirname, 'static/webcam')));
+app.use('/static', express.static(__dirname + '/static'));
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/static/index.html'));
@@ -52,6 +52,11 @@ board.on("ready", function() {
             return 'Is al bezig!';
         }
     }
+    
+    //Scheduled bitch
+    var onSchedule = schedule.scheduleJob({hour: 1, minute: 20}, function(){
+        geefWater(5000);
+    });
     
 });
 

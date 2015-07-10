@@ -11,7 +11,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = socketio.listen(server);
 
-app.use('/static', express.static(__dirname + '/static'));
+app.use('/', express.static(__dirname + '/static'));
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/static/index.html'));
@@ -54,7 +54,7 @@ board.on("ready", function() {
     }
     
     //Scheduled bitch
-    var onSchedule = schedule.scheduleJob({hour: 1, minute: 20}, function(){
+    var onSchedule = schedule.scheduleJob({hour: 10, minute: 10}, function(){
         geefWater(5000);
     });
     
